@@ -1,3 +1,4 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient, Prisma } from "@prisma/client";
 
 // Haha, seriously
@@ -27,8 +28,11 @@ async function getPizze() {
   return data;
 }
 
-export async function GET() {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiPizzeResponse>
+) {
   const pizze = await getPizze();
 
-  return Response.json({ data: pizze });
+  res.status(200).json({ data: pizze });
 }

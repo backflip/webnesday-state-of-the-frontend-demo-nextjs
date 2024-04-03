@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { ApiPizzeResponse } from "../api/pizze/route";
+import type { ApiPizzeResponse } from "../pages/api/pizzas";
 import useSWR from "swr";
 import Pizza from "./Pizza";
 
@@ -14,7 +14,7 @@ const fetcher = (...args: Parameters<typeof fetch>) =>
 
 export default function Pizzas() {
   const [pizzas, setPizzas] = useState<Pizzas>();
-  const { data, isLoading } = useSWR<ApiPizzeResponse>(`/api/pizze`, fetcher);
+  const { data, isLoading } = useSWR<ApiPizzeResponse>(`/api/pizzas`, fetcher);
 
   useEffect(() => {
     const pizzas: Pizzas | undefined = data?.data.reduce(
